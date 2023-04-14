@@ -1,0 +1,1 @@
+GitBlocks crashes if the currently active CB project is not an Git repo.
