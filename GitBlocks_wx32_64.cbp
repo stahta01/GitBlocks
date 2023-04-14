@@ -7,7 +7,7 @@
 		<Option compiler="gcc" />
 		<Build>
 			<Target title="default">
-				<Option output="GitBlocks.so" prefix_auto="0" extension_auto="0" />
+				<Option output="GitBlocks.dll" prefix_auto="0" extension_auto="0" />
 				<Option type="3" />
 				<Option compiler="gcc" />
 				<Option host_application="codeblocks" />
@@ -27,9 +27,14 @@
 					<Add directory="$(#WX32_64.lib)/$(WX_COMPILER)_dll$(WX_CFG)" />
 					<Add directory="$(#cb)/devel32_64" />
 				</Linker>
+				<ExtraCommands>
+					<Add after="zip -j9 GitBlocks.zip manifest.xml" />
+					<Add after="zip -j9 GitBlocks.cbplugin GitBlocks.dll GitBlocks.zip" />
+					<Mode after="always" />
+				</ExtraCommands>
 			</Target>
 			<Environment>
-				<Variable name="WX_CFG" value="compat28" />
+				<Variable name="WX_CFG" value="mono" />
 				<Variable name="WX_COMPILER" value="gcc1220_x64" />
 				<Variable name="WX_SUFFIX" value="u" />
 				<Variable name="WX_VERSION" value="32" />
