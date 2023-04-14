@@ -1,8 +1,8 @@
 #include "../include/RenameDialog.h"
 
 //(*InternalHeaders(RenameDialog)
-#include <wx/string.h>
 #include <wx/intl.h>
+#include <wx/string.h>
 //*)
 
 //(*IdInit(RenameDialog)
