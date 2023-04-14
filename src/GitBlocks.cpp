@@ -63,7 +63,7 @@ void GitBlocks::OnRelease(bool appShutDown)
 
 int GitBlocks::Configure()
 {
-	
+	return 0;
 }
 
 cbConfigurationPanel *GitBlocks::GetConfigurationPanel(wxWindow* parent)
