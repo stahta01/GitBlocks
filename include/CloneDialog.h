@@ -2,9 +2,9 @@
 #define CLONEDIALOG_H
 
 //(*Headers(CloneDialog)
+#include <wx/button.h>
 #include <wx/dialog.h>
 #include <wx/sizer.h>
-#include <wx/button.h>
 #include <wx/stattext.h>
 #include <wx/textctrl.h>
 //*)
@@ -17,11 +17,11 @@ class CloneDialog: public wxDialog
 		virtual ~CloneDialog();
 
 		//(*Declarations(CloneDialog)
-		wxTextCtrl* Origin;
-		wxStaticText* StaticText1;
-		wxTextCtrl* Directory;
-		wxStaticText* StaticText2;
 		wxButton* Browse;
+		wxStaticText* StaticText1;
+		wxStaticText* StaticText2;
+		wxTextCtrl* Directory;
+		wxTextCtrl* Origin;
 		//*)
 
 	protected:
