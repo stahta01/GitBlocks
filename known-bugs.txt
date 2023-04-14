@@ -1,1 +1,2 @@
 GitBlocks sometimes crashes if the currently active CB project is not an Git repo.
+Menu option "Push to origin" fails to work
