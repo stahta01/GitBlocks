@@ -1,0 +1,7 @@
+/.objs*
+*.layout
+*.depend
+*build_log.html
+/GitBlocks.cbplugin
+/GitBlocks.dll
+/GitBlocks.zip
