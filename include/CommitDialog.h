@@ -19,8 +19,8 @@ class CommitDialog: public wxDialog
 		virtual ~CommitDialog();
 
 		//(*Declarations(CommitDialog)
-		wxStaticText* StaticText1;
 		wxCheckListBox* FileChoice;
+		wxStaticText* StaticText1;
 		wxTextCtrl* Comment;
 		//*)
 
