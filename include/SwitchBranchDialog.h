@@ -2,10 +2,10 @@
 #define SWITCHBRANCHDIALOG_H
 
 //(*Headers(SwitchBranchDialog)
+#include <wx/choice.h>
 #include <wx/dialog.h>
 #include <wx/sizer.h>
 #include <wx/stattext.h>
-#include <wx/choice.h>
 //*)
 
 class SwitchBranchDialog: public wxDialog
@@ -16,8 +16,8 @@ class SwitchBranchDialog: public wxDialog
 		virtual ~SwitchBranchDialog();
 
 		//(*Declarations(SwitchBranchDialog)
-		wxStaticText* StaticText1;
 		wxChoice* BranchChoice;
+		wxStaticText* StaticText1;
 		//*)
 
 	protected:

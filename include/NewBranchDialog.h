@@ -17,8 +17,8 @@ class NewBranchDialog: public wxDialog
 		virtual ~NewBranchDialog();
 
 		//(*Declarations(NewBranchDialog)
-		wxStaticText* StaticText1;
 		wxCheckBox* Switch;
+		wxStaticText* StaticText1;
 		wxTextCtrl* Name;
 		//*)
 

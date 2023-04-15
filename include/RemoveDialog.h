@@ -2,10 +2,10 @@
 #define REMOVEDIALOG_H
 
 //(*Headers(RemoveDialog)
+#include <wx/choice.h>
 #include <wx/dialog.h>
 #include <wx/sizer.h>
 #include <wx/stattext.h>
-#include <wx/choice.h>
 //*)
 
 class RemoveDialog: public wxDialog
@@ -16,8 +16,8 @@ class RemoveDialog: public wxDialog
 		virtual ~RemoveDialog();
 
 		//(*Declarations(RemoveDialog)
-		wxStaticText* StaticText1;
 		wxChoice* FileChoice;
+		wxStaticText* StaticText1;
 		//*)
 
 	protected:
