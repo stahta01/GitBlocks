@@ -55,17 +55,28 @@ GitBlocks::~GitBlocks()
 void GitBlocks::OnAttach()
 {
 	git = _T("git");
-	
-	Logger *gitBlocksLogger = new TextCtrlLogger();
-	logSlot = Manager::Get()->GetLogManager()->SetLog(gitBlocksLogger);
-	Manager::Get()->GetLogManager()->Slot(logSlot).title = _T("GitBlocks");
-	CodeBlocksLogEvent evtAdd1(cbEVT_ADD_LOG_WINDOW, gitBlocksLogger, Manager::Get()->GetLogManager()->Slot(logSlot).title);
-	Manager::Get()->ProcessEvent(evtAdd1);
+
+	if (LogManager* LogMan = Manager::Get()->GetLogManager())
+	{
+		gitBlocksLogger = new TextCtrlLogger();
+		logSlot = LogMan->SetLog(gitBlocksLogger);
+		LogMan->Slot(logSlot).title = _T("GitBlocks");
+		CodeBlocksLogEvent evtAdd1(cbEVT_ADD_LOG_WINDOW, gitBlocksLogger, LogMan->Slot(logSlot).title);
+		Manager::Get()->ProcessEvent(evtAdd1);
+	}
 }
 
 void GitBlocks::OnRelease(bool appShutDown)
 {
-	Manager::Get()->GetLogManager()->DeleteLog(logSlot);
+	if (Manager::Get()->GetLogManager())
+	{
+		if (gitBlocksLogger)
+		{
+			CodeBlocksLogEvent evt(cbEVT_REMOVE_LOG_WINDOW, gitBlocksLogger);
+			Manager::Get()->ProcessEvent(evt);
+		}
+	}
+	gitBlocksLogger = 0;
 }
 
 int GitBlocks::Configure()
