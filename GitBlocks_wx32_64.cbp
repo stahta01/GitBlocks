@@ -15,6 +15,7 @@
 				<Compiler>
 					<Add option="-g" />
 					<Add option="-fPIC" />
+					<Add option="-DNOPCH" />
 					<Add directory="$(#cb)/include" />
 					<Add directory="$(#cb)/sdk/wxscintilla/include" />
 					<Add directory="include" />
