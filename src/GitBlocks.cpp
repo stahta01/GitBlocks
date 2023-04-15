@@ -107,21 +107,40 @@ void GitBlocks::BuildMenu(wxMenuBar* menuBar)
 
 void GitBlocks::Execute(wxString command, const wxString comment, wxString dir)
 {
-	if(dir.empty())
-		dir = Manager::Get()->GetProjectManager()->GetActiveProject()->GetBasePath();
-	
 	wxArrayString output;
-	
-	Manager::Get()->GetLogManager()->Log(comment, logSlot);
-	Manager::Get()->GetLogManager()->Log(command, logSlot);
-	
-	wxString ocwd = wxGetCwd();
-	wxSetWorkingDirectory(dir);
-	wxExecute(command, output);
-	wxSetWorkingDirectory(ocwd);
-	
+	output = ExecuteHelper(command, comment, dir);
 	for(unsigned int i=0;i<output.size();i++)
 		Manager::Get()->GetLogManager()->Log(output[i], logSlot);
+}
+
+wxArrayString GitBlocks::ExecuteHelper(wxString command, const wxString comment, wxString dir)
+{
+	wxArrayString output;
+	
+	if(dir.empty())
+	{
+		cbProject *project = Manager::Get()->GetProjectManager()->GetActiveProject();
+		if (project)
+			dir = project->GetBasePath();
+	}
+	
+	if(!comment.empty())
+		Manager::Get()->GetLogManager()->Log(comment, logSlot);
+	Manager::Get()->GetLogManager()->Log(command, logSlot);
+	
+	if(dir.empty())
+	{
+		wxString problem = _("No active CB project");
+		Manager::Get()->GetLogManager()->Log(problem, logSlot);
+	}
+	else
+	{
+		wxString ocwd = wxGetCwd();
+		wxSetWorkingDirectory(dir);
+		wxExecute(command, output);
+		wxSetWorkingDirectory(ocwd);
+	}
+	return output;
 }
 
 void GitBlocks::ExecuteInTerminal(wxString command, const wxString comment, wxString dir)
@@ -136,14 +155,10 @@ void GitBlocks::ExecuteInTerminal(wxString command, const wxString comment, wxSt
 
 wxArrayString GitBlocks::ListBranches()
 {
-	wxString dir = Manager::Get()->GetProjectManager()->GetActiveProject()->GetBasePath();
+	wxString command = git + _T(" branch");
 	
 	wxArrayString output;
-	
-	wxString ocwd = wxGetCwd();
-	wxSetWorkingDirectory(dir);
-	wxExecute(git + _T(" branch"), output);
-	wxSetWorkingDirectory(ocwd);
+	output = ExecuteHelper(command);
 	
 	for(unsigned int i=0;i<output.size();i++)
 		output[i] = output[i].Mid(2);
@@ -287,21 +302,12 @@ void GitBlocks::SwitchBranch(wxCommandEvent &event)
 void GitBlocks::DiffToIndex(wxCommandEvent &event)
 {
 	wxString command = git + _T(" diff");
-	wxString comment = _("Fetching diff to index ...");
-	wxString dir = Manager::Get()->GetProjectManager()->GetActiveProject()->GetBasePath();
-	
-	wxArrayString output;
-	
-	Manager::Get()->GetLogManager()->Log(comment, logSlot);
-	Manager::Get()->GetLogManager()->Log(command, logSlot);
-	
-	wxString ocwd = wxGetCwd();
-	wxSetWorkingDirectory(dir);
-	wxExecute(command, output);
-	wxSetWorkingDirectory(ocwd);
-	
+	wxString comment = _("Fetching diff to index ...");	
 	cbEditor *editor = Manager::Get()->GetEditorManager()->New(_("GitBlocks: Diff to index"));
 	cbStyledTextCtrl *ctrl = editor->GetControl();
+	
+	wxArrayString output;
+	output = ExecuteHelper(command, comment);
 	
 	for(unsigned int i=0;i<output.size();i++)
 		ctrl->AppendText(output[i] + _T("\n"));
@@ -313,24 +319,16 @@ void GitBlocks::Log(wxCommandEvent &event)
 {
 	wxString command = git + _T(" log --pretty=format:%h%x09%an%x09%ad%x09%s");
 	wxString comment = _("Fetching log ...");
-	wxString dir = Manager::Get()->GetProjectManager()->GetActiveProject()->GetBasePath();
-	
-	wxArrayString output;
-	
-	Manager::Get()->GetLogManager()->Log(comment, logSlot);
-	Manager::Get()->GetLogManager()->Log(command, logSlot);
-	
-	wxString ocwd = wxGetCwd();
-	wxSetWorkingDirectory(dir);
-	wxExecute(command, output);
-	wxSetWorkingDirectory(ocwd);
 	
 	cbEditor *editor = Manager::Get()->GetEditorManager()->New(_("GitBlocks: Log"));
 	cbStyledTextCtrl *ctrl = editor->GetControl();
 	
+	wxArrayString output;
+	output = ExecuteHelper(command, comment);
+	
 	for(unsigned int i=0;i<output.size();i++)
 		ctrl->AppendText(output[i] + _T("\n"));
-	
+		
 	editor->SetModified(false);
 }
 
@@ -338,23 +336,15 @@ void GitBlocks::Status(wxCommandEvent &event)
 {
 	wxString command = git + _T(" status");
 	wxString comment = _("Fetching status ...");
-	wxString dir = Manager::Get()->GetProjectManager()->GetActiveProject()->GetBasePath();
-	
-	wxArrayString output;
-	
-	Manager::Get()->GetLogManager()->Log(comment, logSlot);
-	Manager::Get()->GetLogManager()->Log(command, logSlot);
-	
-	wxString ocwd = wxGetCwd();
-	wxSetWorkingDirectory(dir);
-	wxExecute(command, output);
-	wxSetWorkingDirectory(ocwd);
 	
 	cbEditor *editor = Manager::Get()->GetEditorManager()->New(_("GitBlocks: Status"));
 	cbStyledTextCtrl *ctrl = editor->GetControl();
 	
+	wxArrayString output;
+	output = ExecuteHelper(command, comment);
+	
 	for(unsigned int i=0;i<output.size();i++)
 		ctrl->AppendText(output[i] + _T("\n"));
-	
+		
 	editor->SetModified(false);
 }

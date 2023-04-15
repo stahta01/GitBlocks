@@ -128,6 +128,7 @@ private:
 	
 	void RegisterFunction(wxObjectEventFunction func, wxString label);
 	
+	wxArrayString ExecuteHelper(wxString command, const wxString comment = wxEmptyString, wxString dir = wxEmptyString);
 	void Execute(wxString command, const wxString comment, wxString dir = wxEmptyString);
 	void ExecuteInTerminal(wxString command, const wxString comment, wxString dir = wxEmptyString);
 	
