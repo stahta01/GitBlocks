@@ -21,6 +21,7 @@
 #include "CommitDialog.h"
 #include "CommitAllDialog.h"
 #include "CloneDialog.h"
+#include "FolderDialog.h"
 #include "RemoveDialog.h"
 #include "NewBranchDialog.h"
 #include "SwitchBranchDialog.h"
@@ -174,7 +175,16 @@ wxArrayString GitBlocks::ListBranches()
 
 void GitBlocks::Init(wxCommandEvent &event)
 {
-	Execute(git + _T(" init"), _("Creating an empty git repository ..."));
+	FolderDialog dialog(Manager::Get()->GetAppWindow());
+	dialog.SetTitle(_("Creating an empty git repository ..."));
+	if(dialog.ShowModal() == wxID_OK)
+	{
+		wxString command = git + _T(" init");
+		wxString comment = _("Creating an empty git repository ...");
+		wxString dir = dialog.Directory->GetValue();
+		wxArrayString output;
+		output = ExecuteHelper(command, comment, dir);
+	}
 }
 
 void GitBlocks::Clone(wxCommandEvent &event)
