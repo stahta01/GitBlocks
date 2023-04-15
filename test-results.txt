@@ -1,5 +1,5 @@
-GitBlocks::Init                 Works with project open; but, not how I thought it should work
-GitBlocks::Destroy              Fails to work right with project open
+GitBlocks::Init                 Works with project open and resent update
+GitBlocks::Destroy              Works with project open and resent update
 GitBlocks::Clone                NOT YET TESTED
 GitBlocks::Commit               Works with project open
 GitBlocks::CommitAll            Works with project open
