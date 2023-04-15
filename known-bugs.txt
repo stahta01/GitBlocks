@@ -1,0 +1,7 @@
+Multiple GitBlocks logs are openned.
+Menus options that crash CB when no projects are openned:
+  Remove file
+  Commit
+Menu option "Push to origin" does not do what I thought it did.
+It might be working okay; but, I am not sure.
+Since my repos all need passwords that might be why it fails.
