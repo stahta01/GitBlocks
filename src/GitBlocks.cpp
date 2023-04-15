@@ -212,11 +212,17 @@ void GitBlocks::Clone(wxCommandEvent &event)
 
 void GitBlocks::Destroy(wxCommandEvent &event)
 {
-	if(wxMessageBox(_("Are you sure you want to destroy the local repository?"), _("Destroy local repository"), wxYES_NO) == wxYES)
+	FolderDialog dialog(Manager::Get()->GetAppWindow());
+	dialog.SetTitle(_("Are you sure you want to destroy the local repository?"));
+	if(dialog.ShowModal() == wxID_OK)
 	{
 		Manager::Get()->GetLogManager()->Log(_("Destroying the local repository ..."), logSlot);
-		Manager::Get()->GetLogManager()->Log(_T("<rmdir> .git"), logSlot);
-		wxRmdir(wxGetCwd() + _T("/.git"));
+		wxFileName dir( dialog.Directory->GetValue(), "" );
+		dir.AppendDir(_T(".git"));
+		Manager::Get()->GetLogManager()->Log(_T("Directory: ")+dir.GetPath(), logSlot);
+		
+		if (!dir.Rmdir(wxPATH_RMDIR_RECURSIVE))
+			Manager::Get()->GetLogManager()->Log(_T("failed"), logSlot);
 	}
 }
 
