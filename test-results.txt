@@ -1,0 +1,8 @@
+GitBlocks::Init                 Works with project open; but, not how I thought it should work
+GitBlocks::Destroy              Fails to work right with project open
+GitBlocks::Clone                NOT YET TESTED
+GitBlocks::Commit               Works with project open
+GitBlocks::CommitAll            Works with project open
+GitBlocks::Remove               Works with project open
+GitBlocks::NewBranch            Works with project open
+GitBlocks::SwitchBranch         Works with project open
