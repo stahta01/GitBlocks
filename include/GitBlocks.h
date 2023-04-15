@@ -116,6 +116,7 @@ protected:
 	
 private:
 	int logSlot;
+	TextCtrlLogger* gitBlocksLogger;
 	wxMenu *menu;
 	
 	wxString git;
