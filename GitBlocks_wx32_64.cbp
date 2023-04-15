@@ -54,6 +54,7 @@
 		<Unit filename="include/CloneDialog.h" />
 		<Unit filename="include/CommitAllDialog.h" />
 		<Unit filename="include/CommitDialog.h" />
+		<Unit filename="include/FolderDialog.h" />
 		<Unit filename="include/GitBlocks.h" />
 		<Unit filename="include/NewBranchDialog.h" />
 		<Unit filename="include/RemoveDialog.h" />
@@ -63,6 +64,7 @@
 		<Unit filename="src/CloneDialog.cpp" />
 		<Unit filename="src/CommitAllDialog.cpp" />
 		<Unit filename="src/CommitDialog.cpp" />
+		<Unit filename="src/FolderDialog.cpp" />
 		<Unit filename="src/GitBlocks.cpp" />
 		<Unit filename="src/NewBranchDialog.cpp" />
 		<Unit filename="src/RemoveDialog.cpp" />
@@ -71,6 +73,7 @@
 		<Unit filename="wxsmith/CloneDialog.wxs" />
 		<Unit filename="wxsmith/CommitAllDialog.wxs" />
 		<Unit filename="wxsmith/CommitDialog.wxs" />
+		<Unit filename="wxsmith/FolderDialog.wxs" />
 		<Unit filename="wxsmith/NewBranchDialog.wxs" />
 		<Unit filename="wxsmith/RemoveDialog.wxs" />
 		<Unit filename="wxsmith/RenameDialog.wxs" />
@@ -83,6 +86,7 @@
 					<wxDialog wxs="wxsmith/CommitAllDialog.wxs" src="src/CommitAllDialog.cpp" hdr="include/CommitAllDialog.h" fwddecl="0" i18n="1" name="CommitAllDialog" language="CPP" />
 					<wxDialog wxs="wxsmith/CloneDialog.wxs" src="src/CloneDialog.cpp" hdr="include/CloneDialog.h" fwddecl="0" i18n="1" name="CloneDialog" language="CPP" />
 					<wxDialog wxs="wxsmith/CommitDialog.wxs" src="src/CommitDialog.cpp" hdr="include/CommitDialog.h" fwddecl="0" i18n="1" name="CommitDialog" language="CPP" />
+					<wxDialog wxs="wxsmith/FolderDialog.wxs" src="src/FolderDialog.cpp" hdr="include/FolderDialog.h" fwddecl="0" i18n="1" name="FolderDialog" language="CPP" />
 					<wxDialog wxs="wxsmith/NewBranchDialog.wxs" src="src/NewBranchDialog.cpp" hdr="include/NewBranchDialog.h" fwddecl="0" i18n="1" name="NewBranchDialog" language="CPP" />
 					<wxDialog wxs="wxsmith/RemoveDialog.wxs" src="src/RemoveDialog.cpp" hdr="include/RemoveDialog.h" fwddecl="0" i18n="1" name="RemoveDialog" language="CPP" />
 					<wxDialog wxs="wxsmith/RenameDialog.wxs" src="src/RenameDialog.cpp" hdr="include/RenameDialog.h" fwddecl="0" i18n="1" name="RenameDialog" language="CPP" />
