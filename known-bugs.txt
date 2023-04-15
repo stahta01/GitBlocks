@@ -1,4 +1,3 @@
-Multiple GitBlocks logs are openned.
 Menus options that crash CB when no projects are openned:
   Remove file
   Commit
