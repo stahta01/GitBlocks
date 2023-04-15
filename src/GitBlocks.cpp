@@ -1,8 +1,12 @@
-#include "GitBlocks.h"
-
-#include <wx/utils.h>
-
 #include <sdk.h> // Code::Blocks SDK
+
+#include <wx/filedlg.h>
+#ifndef CB_PRECOMP
+	#include <wx/menu.h>
+	#include <wx/menuitem.h>
+	#include <wx/utils.h>
+#endif
+
 #include <configurationpanel.h>
 #include <logmanager.h>
 #include <loggers.h>
@@ -11,6 +15,8 @@
 #include <editormanager.h>
 #include <cbeditor.h>
 #include <cbstyledtextctrl.h>
+
+#include "GitBlocks.h"
 
 #include "CommitDialog.h"
 #include "CommitAllDialog.h"
