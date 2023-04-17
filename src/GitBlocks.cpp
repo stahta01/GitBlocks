@@ -118,6 +118,8 @@ void GitBlocks::BuildMenu(wxMenuBar* menuBar)
 	menu->AppendSeparator();
 	RegisterFunction(wxCommandEventHandler(GitBlocks::DiffToIndex), _("Diff to index"));
 	RegisterFunction(wxCommandEventHandler(GitBlocks::Log), _("Show log"));
+	RegisterFunction(wxCommandEventHandler(GitBlocks::Log5), _("Show log 5"));
+	RegisterFunction(wxCommandEventHandler(GitBlocks::Log20), _("Show log 20"));
 	RegisterFunction(wxCommandEventHandler(GitBlocks::Status), _("Show status"));
 	
 	menuBar->Insert(menuBar->FindMenu(_("&Tools")) + 1, menu, wxT("&GitBlocks"));
@@ -348,9 +350,35 @@ void GitBlocks::DiffToIndex(wxCommandEvent &event)
 	editor->SetModified(false);
 }
 
+void GitBlocks::Log5(wxCommandEvent &event)
+{
+	GitBlocks::LogN(5);
+}
+
+void GitBlocks::Log20(wxCommandEvent &event)
+{
+	GitBlocks::LogN(20);
+}
+
 void GitBlocks::Log(wxCommandEvent &event)
 {
-	wxString command = git + _T(" log --pretty=format:%h%x09%an%x09%ad%x09%s");
+	GitBlocks::LogN();
+}
+
+void GitBlocks::LogN(int count)
+{
+    wxString pretty = _T(" --pretty=format:%h%x09%an%x09%ad%x09%s");
+    wxString command;
+    if (count > 0)
+    {
+        if (count < 10)
+			command = git + _T(" log -") + wxString::Format(wxT("%d"), count);
+		else
+			command = git + _T(" log -") + wxString::Format(wxT("%d"), count) + pretty;	
+	}
+	else
+		command = git + _T(" log --pretty=format:%h%x09%an%x09%ad%x09%s");
+	
 	wxString comment = _("Fetching log ...");
 	
 	cbEditor *editor = Manager::Get()->GetEditorManager()->New(_("GitBlocks: Log"));
