@@ -120,6 +120,7 @@ void GitBlocks::BuildMenu(wxMenuBar* menuBar)
 	RegisterFunction(wxCommandEventHandler(GitBlocks::Log), _("Show log"));
 	RegisterFunction(wxCommandEventHandler(GitBlocks::Log5), _("Show log 5"));
 	RegisterFunction(wxCommandEventHandler(GitBlocks::Log20), _("Show log 20"));
+	RegisterFunction(wxCommandEventHandler(GitBlocks::Remote), _("Show remotes"));
 	RegisterFunction(wxCommandEventHandler(GitBlocks::Status), _("Show status"));
 	
 	menuBar->Insert(menuBar->FindMenu(_("&Tools")) + 1, menu, wxT("&GitBlocks"));
@@ -382,6 +383,23 @@ void GitBlocks::LogN(int count)
 	wxString comment = _("Fetching log ...");
 	
 	cbEditor *editor = Manager::Get()->GetEditorManager()->New(_("GitBlocks: Log"));
+	cbStyledTextCtrl *ctrl = editor->GetControl();
+	
+	wxArrayString output;
+	output = ExecuteHelper(command, comment);
+	
+	for(unsigned int i=0;i<output.size();i++)
+		ctrl->AppendText(output[i] + _T("\n"));
+		
+	editor->SetModified(false);
+}
+
+void GitBlocks::Remote(wxCommandEvent &event)
+{
+	wxString command = git + _T(" remote -v");
+	wxString comment = _("Fetching remote ...");
+	
+	cbEditor *editor = Manager::Get()->GetEditorManager()->New(_("GitBlocks: Remote"));
 	cbStyledTextCtrl *ctrl = editor->GetControl();
 	
 	wxArrayString output;

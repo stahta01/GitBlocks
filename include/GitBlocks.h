@@ -151,6 +151,7 @@ private:
 	void Log(wxCommandEvent &event);
 	void Log5(wxCommandEvent &event);
 	void Log20(wxCommandEvent &event);
+	void Remote(wxCommandEvent &event);
 	void Status(wxCommandEvent &event);
 	
 	DECLARE_EVENT_TABLE();
