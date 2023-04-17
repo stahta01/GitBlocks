@@ -1,6 +1,6 @@
 GitBlocks::Init                 Works with project open and resent update
 GitBlocks::Destroy              Works with project open and resent update
-GitBlocks::Clone                NOT YET TESTED
+GitBlocks::Clone                Worked okay
 GitBlocks::Commit               Works with project open
 GitBlocks::CommitAll            Works with project open
 GitBlocks::Remove               Works with project open
