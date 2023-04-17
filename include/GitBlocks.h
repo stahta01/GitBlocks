@@ -129,6 +129,8 @@ private:
 	
 	wxArrayString ListBranches();
 	
+	void LogN(int count=0);
+	
 	void Init(wxCommandEvent &event);
 	void Clone(wxCommandEvent &event);
 	void Destroy(wxCommandEvent &event);
@@ -147,6 +149,8 @@ private:
 	
 	void DiffToIndex(wxCommandEvent &event);
 	void Log(wxCommandEvent &event);
+	void Log5(wxCommandEvent &event);
+	void Log20(wxCommandEvent &event);
 	void Status(wxCommandEvent &event);
 	
 	DECLARE_EVENT_TABLE();
