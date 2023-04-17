@@ -1,6 +1,4 @@
-Add "Show log -3"
-
-Add "Show remote"
+Add "Show remotes"
 git remote -v
 
 Add "Show user config"
