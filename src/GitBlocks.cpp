@@ -116,6 +116,7 @@ void GitBlocks::BuildMenu(wxMenuBar* menuBar)
 	RegisterFunction(wxCommandEventHandler(GitBlocks::NewBranch), _("Add new branch"));
 	RegisterFunction(wxCommandEventHandler(GitBlocks::SwitchBranch), _("Switch branch"));
 	menu->AppendSeparator();
+	RegisterFunction(wxCommandEventHandler(GitBlocks::ShowLineFeedConfig), _("Show linefeed config"));
 	RegisterFunction(wxCommandEventHandler(GitBlocks::DiffToIndex), _("Diff to index"));
 	RegisterFunction(wxCommandEventHandler(GitBlocks::Log), _("Show log"));
 	RegisterFunction(wxCommandEventHandler(GitBlocks::Log5), _("Show log 5"));
@@ -425,5 +426,55 @@ void GitBlocks::Status(wxCommandEvent &event)
 	for(unsigned int i=0;i<output.size();i++)
 		ctrl->AppendText(output[i] + _T("\n"));
 		
+	editor->SetModified(false);
+}
+
+wxArrayString GitBlocks::Config(wxString configsetting, wxString dir)
+{
+	wxArrayString output;
+
+	wxString command = git + _T(" config ") + configsetting;
+
+	if(dir.empty())
+	{
+		cbProject *project = Manager::Get()->GetProjectManager()->GetActiveProject();
+		if (project)
+			dir = project->GetBasePath();
+	}
+	
+	Manager::Get()->GetLogManager()->Log(_T("Directory: ")+dir, logSlot);
+	wxString ocwd = wxGetCwd();
+	wxSetWorkingDirectory(dir);
+	wxExecute(command, output);
+	wxSetWorkingDirectory(ocwd);
+
+	return output;
+}
+
+void GitBlocks::ShowLineFeedConfigHelper(cbStyledTextCtrl *ctrl, wxString configSetting)
+{
+	wxArrayString output;
+	
+	output = Config(configSetting);
+	
+	if (output.size() > 0)
+		ctrl->AppendText(configSetting + " "+ output[0] + _T("\n"));
+	else
+	    ctrl->AppendText(configSetting + _T("\n"));
+}
+void GitBlocks::ShowLineFeedConfig(wxCommandEvent &event)
+{
+	cbEditor *editor = Manager::Get()->GetEditorManager()->New(_("GitBlocks: LineFeedConfig"));
+	cbStyledTextCtrl *ctrl = editor->GetControl();
+	
+	wxString configSetting=_T("core.eol");
+	ShowLineFeedConfigHelper(ctrl, configSetting);
+
+	configSetting=_T("core.autocrlf");
+	ShowLineFeedConfigHelper(ctrl, configSetting);
+
+	configSetting=_T("core.safecrlf");
+	ShowLineFeedConfigHelper(ctrl, configSetting);
+	
 	editor->SetModified(false);
 }

@@ -123,6 +123,8 @@ private:
 	
 	void RegisterFunction(wxObjectEventFunction func, wxString label);
 	
+	void ShowLineFeedConfigHelper(cbStyledTextCtrl *ctrl, wxString configSetting);
+	wxArrayString Config(wxString configsetting, wxString dir = wxEmptyString);
 	wxArrayString ExecuteHelper(wxString command, const wxString comment = wxEmptyString, wxString dir = wxEmptyString);
 	void Execute(wxString command, const wxString comment, wxString dir = wxEmptyString);
 	void ExecuteInTerminal(wxString command, const wxString comment, wxString dir = wxEmptyString);
@@ -147,6 +149,7 @@ private:
 	void NewBranch(wxCommandEvent &event);
 	void SwitchBranch(wxCommandEvent &event);
 	
+	void ShowLineFeedConfig(wxCommandEvent &event);
 	void DiffToIndex(wxCommandEvent &event);
 	void Log(wxCommandEvent &event);
 	void Log5(wxCommandEvent &event);
