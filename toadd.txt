@@ -1,18 +1,10 @@
-Add "Show remotes"
-git remote -v
-
 Add "Show user config"
 echo -n "user.name: " && git config user.name || echo ""
 echo -n "user.email: " && git config user.email || echo ""
 echo -n "credential.helper: " && git config credential.helper || echo ""
-And, maybe add these to it
+And, maybe add these to "Show user config"
 echo -n "core.askPass: " && git config core.askPass || echo ""
 echo -n "github.user: " && git config github.user || echo ""
 echo -n "github.token: " && git config github.token || echo ""
-
-Add "Show linefeed config"
-echo -n "core.eol: " && git config core.eol || echo ""
-echo -n "core.autocrlf: " && git config core.autocrlf || echo ""
-echo -n "core.safecrlf: " && git config core.safecrlf || echo ""
 
 Maybe add "Open git gui"
