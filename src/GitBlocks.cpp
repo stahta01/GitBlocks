@@ -269,7 +269,7 @@ void GitBlocks::CommitAll(wxCommandEvent &event)
 		
 		command = git + _T(" add");
 		command += _T(" ") + project->GetFilename();
-		for(unsigned int i=0;i<project->GetFilesCount();i++)
+		for(int i=0; i<project->GetFilesCount(); i++)
 			command += _T(" ") + project->GetFile(i)->relativeFilename;
 		Execute(command, _("Adding files ..."));
 		

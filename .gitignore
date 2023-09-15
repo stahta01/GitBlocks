@@ -5,3 +5,7 @@
 /GitBlocks.cbplugin
 /GitBlocks.dll
 /GitBlocks.zip
+/.cache/
+/GitBlocks.so
+/compile_commands.json
+/libGitBlocks.so

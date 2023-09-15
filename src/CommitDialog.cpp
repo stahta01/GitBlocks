@@ -50,7 +50,7 @@ CommitDialog::CommitDialog(wxWindow* parent,wxWindowID id,const wxPoint& pos,con
 	
 	cbProject *project = Manager::Get()->GetProjectManager()->GetActiveProject();
 	FileChoice->Append(project->GetFilename());
-	for(unsigned int i=0;i<project->GetFilesCount();i++)
+	for( int i=0; i<project->GetFilesCount(); i++)
 		FileChoice->Append(project->GetFile(i)->relativeFilename);
 }
 
