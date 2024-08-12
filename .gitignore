@@ -3,6 +3,7 @@
 *.depend
 *build_log.html
 /GitBlocks.cbplugin
+/GitBlocks-*.cbplugin
 /GitBlocks.dll
 /GitBlocks.zip
 /.cache/
